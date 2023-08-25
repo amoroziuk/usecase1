@@ -164,12 +164,9 @@ public class CountryServiceTests
 
         // Assert
         _mockLogger.Verify(
-            x => x.Log(
-                It.IsAny<LogLevel>(),
-                It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((value, type) => value.ToString().Contains("An error occurred while fetching all countries")),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+            x => x.LogError(
+                It.IsAny<string>(),
+                It.IsAny<string>()
             ),
             Times.Once
         );
@@ -187,12 +184,9 @@ public class CountryServiceTests
 
         // Assert
         _mockLogger.Verify(
-            x => x.Log(
-                It.IsAny<LogLevel>(),
-                It.IsAny<EventId>(),
-                It.Is<It.IsAnyType>((value, type) => value.ToString().Contains("An error occurred while fetching filtered countries")),
-                It.IsAny<Exception>(),
-                It.IsAny<Func<It.IsAnyType, Exception, string>>()
+            x => x.LogError(
+                It.IsAny<string>(),
+                It.IsAny<string>()
             ),
             Times.Once
         );
