@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Reflection;
 using UseCase1.Models;
 using UseCase1.Services;
 
@@ -33,12 +31,13 @@ public class CountriesController : ControllerBase
     }
 
     [HttpGet("byName")]
-    public async Task<IActionResult> FetchByName([FromQuery] string name, [FromQuery] string sort = "ascend", 
+    public async Task<IActionResult> FetchByName([FromQuery] string name, [FromQuery] string sort = "ascend",
         [FromQuery] int limit = 15)
     {
         try
         {
-            var countries = await _countryService.GetFilteredCountriesAsync(new RequestModel() { 
+            var countries = await _countryService.GetFilteredCountriesAsync(new RequestModel()
+            {
                 Name = name,
                 Sort = sort,
                 Limit = limit
