@@ -7,6 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="UserCase1.Tests\**" />
+    <Content Remove="UserCase1.Tests\**" />
+    <EmbeddedResource Remove="UserCase1.Tests\**" />
+    <None Remove="UserCase1.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.3.0" />
   </ItemGroup>

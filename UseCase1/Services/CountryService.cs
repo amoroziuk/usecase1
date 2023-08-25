@@ -9,9 +9,9 @@ public class CountryService : ICountryService
     private readonly ILogger<CountryService> _logger;
     private readonly string _apiBaseUrl;
 
-    public CountryService(IConfiguration configuration, ILogger<CountryService> logger)
+    public CountryService(IConfiguration configuration, ILogger<CountryService> logger, HttpClient httpClient)
     {
-        _httpClient = new HttpClient();
+        _httpClient = httpClient;
         _apiBaseUrl = configuration.GetValue<string>("CountryApiBaseUrl")
                      ?? throw new ArgumentNullException("CountryApiBaseUrl is not defined in configuration.");
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));

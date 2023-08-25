@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Diagnostics.CodeAnalysis;
 
 namespace UseCase1.Models
 {
@@ -110,12 +111,14 @@ namespace UseCase1.Models
         public PostalCode PostalCode { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class CapitalInfo
     {
         [JsonProperty("latlng")]
         public List<double> Latlng { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Car
     {
         [JsonProperty("signs")]
@@ -125,6 +128,7 @@ namespace UseCase1.Models
         public string Side { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class CoatOfArms
     {
         [JsonProperty("png")]
@@ -134,12 +138,14 @@ namespace UseCase1.Models
         public Uri Svg { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Currencies
     {
         [JsonProperty("ZAR")]
         public Zar Zar { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Zar
     {
         [JsonProperty("name")]
@@ -149,6 +155,7 @@ namespace UseCase1.Models
         public string Symbol { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Demonyms
     {
         [JsonProperty("eng")]
@@ -158,6 +165,7 @@ namespace UseCase1.Models
         public Eng Fra { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Eng
     {
         [JsonProperty("f")]
@@ -167,6 +175,7 @@ namespace UseCase1.Models
         public string M { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Flags
     {
         [JsonProperty("png")]
@@ -179,12 +188,14 @@ namespace UseCase1.Models
         public string Alt { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Gini
     {
         [JsonProperty("2014")]
         public long The2014 { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Idd
     {
         [JsonProperty("root")]
@@ -194,6 +205,7 @@ namespace UseCase1.Models
         public List<string> Suffixes { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Languages
     {
         [JsonProperty("afr")]
@@ -239,6 +251,7 @@ namespace UseCase1.Models
         public Uri OpenStreetMaps { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Name
     {
         [JsonProperty("common")]
@@ -251,6 +264,7 @@ namespace UseCase1.Models
         public Dictionary<string, Translation> NativeName { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class Translation
     {
         [JsonProperty("official")]
@@ -260,6 +274,7 @@ namespace UseCase1.Models
         public string Common { get; set; }
     }
 
+    [ExcludeFromCodeCoverage]
     public partial class PostalCode
     {
         [JsonProperty("format")]
