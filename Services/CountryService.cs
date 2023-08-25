@@ -25,10 +25,19 @@ public class CountryService : ICountryService
         return countries;
     }
 
-    public async Task<IEnumerable<Country>> SearchCountriesAsync(string name)
+    public async Task<IEnumerable<Country>> GetFilteredCountriesAsync(RequestModel model)
     {
         var allCountries = await GetAllCountriesAsync();
 
-        return allCountries?.Where(x => x.Name.Common.ToLower().Contains(name.ToLower()));
+        if (!string.IsNullOrWhiteSpace(model.Name))
+            return allCountries?.Where(x => x.Name.Common.ToLower().Contains(model.Name.ToLower()));
+
+        if (model.Population.HasValue)
+        {
+            var populationExact = model.Population.Value * 1000000; // Convert input from millions to the exact number
+            return allCountries?.Where(x => x.Population < populationExact);
+        }
+
+        return allCountries;
     }
 }

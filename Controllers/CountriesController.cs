@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using UseCase1.Models;
 using UseCase1.Services;
 
 namespace UseCase1.Controllers;
@@ -15,26 +16,11 @@ public class CountriesController : ControllerBase
     }
 
     [HttpGet("fetchCountries")]
-    public async Task<IActionResult> FetchCountries()
+    public async Task<IActionResult> FetchCountries([FromQuery] RequestModel model)
     {
         try
         {
-            var countries = await _countryService.GetAllCountriesAsync();
-
-            return Ok(countries);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [HttpGet("name/common")]
-    public async Task<IActionResult> SearchCountries(string name)
-    {
-        try
-        {
-            var countries = await _countryService.SearchCountriesAsync(name);
+            var countries = await _countryService.GetFilteredCountriesAsync(model);
 
             return Ok(countries);
         }

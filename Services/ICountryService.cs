@@ -5,5 +5,5 @@ namespace UseCase1.Services;
 public interface ICountryService
 {
     Task<IEnumerable<Country>> GetAllCountriesAsync();
-    Task<IEnumerable<Country>> SearchCountriesAsync(string name);
+    Task<IEnumerable<Country>> GetFilteredCountriesAsync(RequestModel model);
 }
