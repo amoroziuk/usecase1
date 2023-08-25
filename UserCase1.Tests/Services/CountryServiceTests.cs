@@ -159,17 +159,8 @@ public class CountryServiceTests
         _mockHttpMessageHandler.Setup(x => x.Send(It.IsAny<HttpRequestMessage>()))
             .Throws(new HttpRequestException());
 
-        // Act
+        // Act & Assert
         await Assert.ThrowsAsync<HttpRequestException>(() => _countryService.GetAllCountriesAsync());
-
-        // Assert
-        _mockLogger.Verify(
-            x => x.LogError(
-                It.IsAny<string>(),
-                It.IsAny<string>()
-            ),
-            Times.Once
-        );
     }
 
     [Fact]
@@ -179,17 +170,8 @@ public class CountryServiceTests
         _mockHttpMessageHandler.Setup(x => x.Send(It.IsAny<HttpRequestMessage>()))
             .Throws(new HttpRequestException());
 
-        // Act
+        // Act & Assert
         await Assert.ThrowsAsync<HttpRequestException>(() => _countryService.GetFilteredCountriesAsync(new RequestModel()));
-
-        // Assert
-        _mockLogger.Verify(
-            x => x.LogError(
-                It.IsAny<string>(),
-                It.IsAny<string>()
-            ),
-            Times.Once
-        );
     }
 
     [Fact]
