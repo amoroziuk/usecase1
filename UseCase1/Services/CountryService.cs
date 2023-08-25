@@ -12,8 +12,7 @@ public class CountryService : ICountryService
     public CountryService(IConfiguration configuration, ILogger<CountryService> logger, HttpClient httpClient)
     {
         _httpClient = httpClient;
-        _apiBaseUrl = configuration.GetValue<string>("CountryApiBaseUrl")
-                     ?? throw new ArgumentNullException("CountryApiBaseUrl is not defined in configuration.");
+        _apiBaseUrl = configuration.GetValue<string>("CountryApiBaseUrl");
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
     }
 
@@ -29,7 +28,7 @@ public class CountryService : ICountryService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"An error occurred while fetching all countries: {ex.Message}");
+            _logger.LogError($"An error occurred while fetching all countries", ex.Message);
             throw; // Re-throw the exception or handle it as required
         }
     }
@@ -48,24 +47,24 @@ public class CountryService : ICountryService
         }
         catch (Exception ex)
         {
-            _logger.LogError($"An error occurred while fetching filtered countries: {ex.Message}");
+            _logger.LogError($"An error occurred while fetching filtered countries", ex.Message);
             throw; // Re-throw the exception or handle it as required
         }
     }
 
-    private IEnumerable<Country> DeserializeCountries(string responseData)
+    private static IEnumerable<Country> DeserializeCountries(string responseData)
     {
         return JsonConvert.DeserializeObject<IEnumerable<Country>>(responseData);
     }
 
-    private IEnumerable<Country> FilterCountriesByName(IEnumerable<Country> countries, string name)
+    private static IEnumerable<Country> FilterCountriesByName(IEnumerable<Country> countries, string name)
     {
         return string.IsNullOrWhiteSpace(name)
             ? countries
             : countries.Where(x => x.Name.Common.ToLower().Contains(name.ToLower()));
     }
 
-    private IEnumerable<Country> FilterCountriesByPopulation(IEnumerable<Country> countries, long? populationInMillions)
+    private static IEnumerable<Country> FilterCountriesByPopulation(IEnumerable<Country> countries, long? populationInMillions)
     {
         if (!populationInMillions.HasValue)
         {
@@ -76,7 +75,7 @@ public class CountryService : ICountryService
         return countries.Where(x => x.Population < populationExact);
     }
 
-    private IEnumerable<Country> SortCountries(IEnumerable<Country> countries, string sort)
+    private static IEnumerable<Country> SortCountries(IEnumerable<Country> countries, string sort)
     {
         return sort?.ToLower() switch
         {
