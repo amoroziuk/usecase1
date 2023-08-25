@@ -1,24 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1\\UseCase1.csproj": {}
+    "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1.csproj": {}
   },
   "projects": {
-    "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1\\UseCase1.csproj": {
+    "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1\\UseCase1.csproj",
+        "projectUniqueName": "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1.csproj",
         "projectName": "UseCase1",
-        "projectPath": "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1\\UseCase1.csproj",
+        "projectPath": "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1.csproj",
         "packagesPath": "C:\\Users\\amoro\\.nuget\\packages\\",
-        "outputPath": "C:\\Archeio\\Softserve\\UseCases\\usecase1\\UseCase1\\obj\\",
+        "outputPath": "C:\\Archeio\\Softserve\\UseCases\\usecase1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\amoro\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net7.0"
+          "net6.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
@@ -26,8 +26,8 @@
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net7.0": {
-            "targetAlias": "net7.0",
+          "net6.0": {
+            "targetAlias": "net6.0",
             "projectReferences": {}
           }
         },
@@ -38,16 +38,12 @@
         }
       },
       "frameworks": {
-        "net7.0": {
-          "targetAlias": "net7.0",
+        "net6.0": {
+          "targetAlias": "net6.0",
           "dependencies": {
-            "Microsoft.AspNetCore.OpenApi": {
-              "target": "Package",
-              "version": "[7.0.10, )"
-            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
-              "version": "[6.5.0, )"
+              "version": "[6.2.3, )"
             }
           },
           "imports": [
@@ -61,6 +57,24 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Ref",
+              "version": "[6.0.21, 6.0.21]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[6.0.21, 6.0.21]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Ref",
+              "version": "[6.0.21, 6.0.21]"
+            },
+            {
+              "name": "Microsoft.WindowsDesktop.App.Ref",
+              "version": "[6.0.21, 6.0.21]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
