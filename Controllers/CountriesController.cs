@@ -19,7 +19,7 @@ public class CountriesController : ControllerBase
     {
         try
         {
-            var countries = _countryService.GetAllCountriesAsync();
+            var countries = await _countryService.GetAllCountriesAsync();
 
             return Ok(countries);
         }
