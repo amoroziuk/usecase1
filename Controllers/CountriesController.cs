@@ -1,7 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using UseCase1.Models;
+using UseCase1.Services;
 
 namespace UseCase1.Controllers;
 
@@ -9,11 +7,11 @@ namespace UseCase1.Controllers;
 [ApiController]
 public class CountriesController : ControllerBase
 {
-    private readonly HttpClient _httpClient;
+    private readonly ICountryService _countryService;
 
-    public CountriesController()
+    public CountriesController(ICountryService countryService)
     {
-        _httpClient = new HttpClient();
+        _countryService = countryService;
     }
 
     [HttpGet("fetchCountries")]
@@ -21,15 +19,24 @@ public class CountriesController : ControllerBase
     {
         try
         {
-            // Make a request to the public REST Countries API
-            var response = await _httpClient.GetAsync("https://restcountries.com/v3.1/all");
-            response.EnsureSuccessStatusCode();
+            var countries = _countryService.GetAllCountriesAsync();
 
-            // Parse the retrieved API response data into a variable/object
-            var responseData = await response.Content.ReadAsStringAsync();
-            var jsonObject = JsonConvert.DeserializeObject<IEnumerable<Country>>(responseData);
+            return Ok(countries);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
 
-            return Ok(jsonObject.Take(1));
+    [HttpGet("name/common")]
+    public async Task<IActionResult> SearchCountries(string name)
+    {
+        try
+        {
+            var countries = await _countryService.SearchCountriesAsync(name);
+
+            return Ok(countries);
         }
         catch (Exception ex)
         {
