@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Reflection;
 using UseCase1.Models;
 using UseCase1.Services;
 
@@ -28,5 +30,12 @@ public class CountriesController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> GetWithLimit([FromQuery] int limit = 15)
+    {
+        var countries = await _countryService.GetAllCountriesAsync(limit);
+        return Ok(countries);
     }
 }

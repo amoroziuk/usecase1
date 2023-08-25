@@ -14,7 +14,7 @@ public class CountryService : ICountryService
         _apiBaseUrl = configuration.GetValue<string>("CountryApiBaseUrl");
     }
 
-    public async Task<IEnumerable<Country>> GetAllCountriesAsync()
+    public async Task<IEnumerable<Country>> GetAllCountriesAsync(int? limit = null)
     {
         var response = await _httpClient.GetAsync(_apiBaseUrl);
         response.EnsureSuccessStatusCode();
@@ -22,7 +22,7 @@ public class CountryService : ICountryService
         var responseData = await response.Content.ReadAsStringAsync();
         var countries = JsonConvert.DeserializeObject<IEnumerable<Country>>(responseData);
 
-        return countries;
+        return limit.HasValue ? countries.Take(limit.Value) : countries;
     }
 
     public async Task<IEnumerable<Country>> GetFilteredCountriesAsync(RequestModel model)

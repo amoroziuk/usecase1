@@ -1,0 +1,75 @@
+i'm using .net 6 web api and i need to create endpoint that accepts numbers as an attribute and can limit the number of records.  
+
+The functionality should accept a number and retrieve first n records (e.g., providing number `15` I should receive 15 first records from API).  
+
+ChatGPT
+To achieve the described functionality in a .NET 6 Web API, you can make use of query parameters to accept the number of records that should be returned. You can then use this number to limit the number of records returned from the database.
+
+Below is a step-by-step example:
+
+1. Create a Model
+Firstly, create a model class that represents the data you want to store. For example, let's assume we're dealing with a simple Person model.
+
+csharp
+Copy code
+public class Person
+{
+    public int Id { get; set; }
+    public string Name { get; set; }
+    public int Age { get; set; }
+}
+2. Create a Repository or Data Service
+Create a simple data repository to hold the data. In a real-world application, you'd fetch the data from a database, but for demonstration purposes, a simple list will suffice.
+
+csharp
+Copy code
+public class PersonRepository
+{
+    private List<Person> _people;
+
+    public PersonRepository()
+    {
+        _people = new List<Person>
+        {
+            new Person { Id = 1, Name = "John", Age = 25 },
+            // Add more data
+        };
+    }
+
+    public IEnumerable<Person> GetPeople(int limit)
+    {
+        return _people.Take(limit);
+    }
+}
+3. Create API Controller
+Now, create an API controller that has an action method to retrieve the first n records based on the query parameter.
+
+csharp
+Copy code
+[ApiController]
+[Route("api/[controller]")]
+public class PeopleController : ControllerBase
+{
+    private readonly PersonRepository _repository;
+
+    public PeopleController()
+    {
+        _repository = new PersonRepository();
+    }
+
+    [HttpGet]
+    public ActionResult<IEnumerable<Person>> Get([FromQuery] int limit = 10)
+    {
+        var people = _repository.GetPeople(limit);
+        return Ok(people);
+    }
+}
+In this example, the Get action method accepts a query parameter named limit that defaults to 10 if not specified. This limit is then passed to the repository's GetPeople method, which uses LINQ's Take method to return the first n records.
+
+4. Run the API
+Run your API, and you can test it using Postman or through a browser. To get the first 15 records, make a GET request to:
+
+bash
+Copy code
+http://localhost:5000/api/people?limit=15
+That's it! This should help you create an API endpoint that can limit the number of records returned based on a query parameter. Note that you'll want to replace the PersonRepository with actual database logic in a real-world application.
