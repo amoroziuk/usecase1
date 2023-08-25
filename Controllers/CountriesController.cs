@@ -29,9 +29,6 @@ public class CountriesController : ControllerBase
             var responseData = await response.Content.ReadAsStringAsync();
             var jsonObject = JsonConvert.DeserializeObject<IEnumerable<Country>>(responseData);
 
-            // Your logic to handle the jsonObject as needed
-            // ...
-
             return Ok(jsonObject.Take(1));
         }
         catch (Exception ex)
