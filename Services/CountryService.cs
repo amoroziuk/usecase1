@@ -28,7 +28,6 @@ public class CountryService : ICountryService
     public async Task<IEnumerable<Country>> GetFilteredCountriesAsync(RequestModel model)
     {
         var allCountries = await GetAllCountriesAsync();
-        var result = new List<Country>();
 
         if (!string.IsNullOrWhiteSpace(model.Name))
             allCountries = allCountries?.Where(x => x.Name.Common.ToLower().Contains(model.Name.ToLower()));
