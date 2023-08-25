@@ -32,10 +32,44 @@ public class CountriesController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> GetWithLimit([FromQuery] int limit = 15)
+    [HttpGet("byName")]
+    public async Task<IActionResult> FetchByName([FromQuery] string name, [FromQuery] string sort = "ascend", 
+        [FromQuery] int limit = 15)
     {
-        var countries = await _countryService.GetAllCountriesAsync(limit);
-        return Ok(countries);
+        try
+        {
+            var countries = await _countryService.GetFilteredCountriesAsync(new RequestModel() { 
+                Name = name,
+                Sort = sort,
+                Limit = limit
+            });
+
+            return Ok(countries);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("byPopulation")]
+    public async Task<IActionResult> FetchByPopulation([FromQuery] int population, [FromQuery] string sort = "ascend",
+        [FromQuery] int limit = 15)
+    {
+        try
+        {
+            var countries = await _countryService.GetFilteredCountriesAsync(new RequestModel()
+            {
+                Population = population,
+                Sort = sort,
+                Limit = limit
+            });
+
+            return Ok(countries);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 }
